@@ -2,6 +2,7 @@ package br.com.github.caroltmaciel.socialmedia.services;
 
 import br.com.github.caroltmaciel.socialmedia.domain.User;
 import br.com.github.caroltmaciel.socialmedia.repository.UserRepository;
+import br.com.github.caroltmaciel.socialmedia.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +16,10 @@ public class UserService {
 
     public List<User> findAll() {
         return repo.findAll();
+    }
+
+    public User findById(String id) {
+        return repo.findById(id)
+            .orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 }
